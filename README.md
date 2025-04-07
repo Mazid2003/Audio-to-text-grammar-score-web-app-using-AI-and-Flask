@@ -26,9 +26,11 @@ project/
     │ └── style.css # Custom CSS with dark mode support (if needed)
 ├── templates/ 
     │ └── index.html # HTML frontend with upload form & result display (you can directly include css as internal css)
-├── audios_train/ # Training audio dataset (if applicable) 
-├── audios_test/ # Test audio files for demo └── README.md # You're here!
-├── uploads/ #audio files of the users(i.e, input files) will be stored in this folder 
+├── audios_train/ # Training audio dataset  
+├── audios_test/ # Test audio files for demo 
+├── uploads/ #audio files of the users(i.e, input files) will be stored in this folder
+├── train_model.py/ # for training the grammar_model.pkl file 
+├── train_model.ipynb/ # for training the vectorizer.pkl file
 ```
 ## 🚀 Getting Started
 
@@ -85,8 +87,17 @@ SpeechRecognition 🎙️
 
 **📸 UI Preview**
 
-Light Mode ☀️ vs Dark Mode 🌙
-<img src="screenshots/light_mode.png" width="45%"/> <img src="screenshots/dark_mode.png" width="45%"/>
+Light Mode ☀️  
+
+![out1](https://github.com/user-attachments/assets/7892778c-1437-43fa-bed4-dbb868746d9c)
+
+![out2](https://github.com/user-attachments/assets/02cd2240-a914-4cdb-b7ec-00f1f67b88ed)
+
+Dark Mode 🌙
+
+![out3](https://github.com/user-attachments/assets/d06efc6c-2da8-4a4c-afe8-3557b787e94d)
+
+![out4](https://github.com/user-attachments/assets/cc84ae1d-e27c-41f9-888b-23dd57793d61)
 
 **🔐 License**
 
