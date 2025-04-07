@@ -16,7 +16,7 @@ This web application allows users to upload or record audio, converts the speech
 ---
 
 ## 📁 Project Structure
-
+```
 project/ 
 ├── app.py # Flask backend to handle audio and prediction 
 ├── models
@@ -29,7 +29,7 @@ project/
 ├── audios_train/ # Training audio dataset (if applicable) 
 ├── audios_test/ # Test audio files for demo └── README.md # You're here!
 ├── uploads/ #audio files of the users(i.e, input files) will be stored in this folder 
-
+```
 ## 🚀 Getting Started
 
 ### Prerequisites
