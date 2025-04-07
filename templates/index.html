@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grammar Score Analyzer 🎙️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Google Font */
+/* Default Light Mode */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #80d8ff);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-attachment: fixed;
+  transition: background 0.4s ease;
+}
+
+.container {
+  background-color: #ffffffd9;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.container:hover {
+  transform: scale(1.015);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+#darkModeToggle {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  padding: 10px 14px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  background-color: #1976d2;
+}
+
+h1 {
+  text-align: center;
+  color: #0d47a1;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+input[type="file"] {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid #ccc;
+  background-color: #f1f9ff;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #007bff;
+  background-color: #e6f4ff;
+}
+
+button:not(#darkModeToggle) {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #2196f3, #1e88e5);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:not(#darkModeToggle):hover {
+  background: linear-gradient(to right, #1976d2, #1565c0);
+  transform: translateY(-2px);
+}
+
+.result {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #f4fbff;
+  border-left: 5px solid #2196f3;
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px #d3ebf9;
+}
+
+.score {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.text {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Dark Mode */
+body.dark {
+  background: linear-gradient(135deg, #1e1e2f, #2c2c3e);
+  color: #e0e0e0;
+}
+
+body.dark .container {
+  background-color: rgba(40, 44, 52, 0.95);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+body.dark h1 {
+  color: #90caf9;
+}
+
+body.dark input[type="file"] {
+  background-color: #2e3440;
+  border-color: #555;
+  color: #ddd;
+}
+
+body.dark input[type="file"]:hover {
+  border-color: #90caf9;
+  background-color: #3b4252;
+}
+
+body.dark .result {
+  background-color: #2b2b3c;
+  border-left-color: #64b5f6;
+  box-shadow: inset 0 0 10px #3a3a4f;
+}
+
+body.dark .score {
+  color: #81c784;
+}
+
+body.dark .text {
+  color: #e0e0e0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .score {
+    font-size: 1.2em;
+  }
+
+  .text {
+    font-size: 0.95em;
+  }
+}
+footer {
+
+background: var(--header-bg);
+color: #1565c0;
+text-align: center;
+padding: 20px;
+align-items: end;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎧 Audio Grammar Analyzer</h1>
+    <form action="/process_audio" method="post" enctype="multipart/form-data">
+      <input type="file" name="audio" accept=".wav,.mp3,.m4a" required>
+      <button type="submit">Analyze Audio</button>
+      <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
+
+    </form>
+
+    {% if text %}
+    <div class="result">
+      <div class="text"><strong>Recognized Text:</strong><br>{{ text }}</div>
+      <div class="score"><strong>Grammar Score:</strong> {{ score }}</div>
+    </div>
+    {% endif %}
+    <footer>
+        <p>&copy; 2025 Mohammad Mazid. All rights reserved.</p>
+    </footer>
+  </div>
+  
+</body>
+<script>
+    const toggleBtn = document.getElementById("darkModeToggle");
+  
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggleBtn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
+  </script>
+</html>
