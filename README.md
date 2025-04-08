@@ -23,7 +23,7 @@ This web application allows users to upload or record audio, converts the speech
 project/ 
 ├── app.py # Flask backend to handle audio and prediction 
 ├── models
-    ├── grammar_model.pkl # Pre-trained grammar score prediction model
+    ├── grammar_model.pkl # trained grammar score prediction model
     ├── vectorizer.pkl
 ├── static/ 
     │ └── style.css # Custom CSS with dark mode support (if needed)
