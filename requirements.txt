@@ -1,1 +1,43 @@
+✅ Project Requirements
 
+This web app does the following:
+
+Allows users to upload audio files (speech)
+
+Converts speech to text using Google Speech Recognition
+
+Predicts a grammar score using a pre-trained ML model
+
+Displays both the text and grammar score in a responsive web interface
+
+Includes optional dark mode
+
+Uses FFmpeg for audio compatibility (e.g., .webm, .mp3, etc.)
+
+🧾 Python Packages (requirements.txt)
+
+Flask==2.3.3
+SpeechRecognition==3.10.0
+pydub==0.25.1
+scikit-learn==1.3.2
+joblib==1.3.2
+numpy==1.26.4
+werkzeug==3.0.1
+
+📦 External Dependency (Manual Installation)
+
+Dependency	Purpose	Install Instructions
+
+ffmpeg	Audio conversion (.webm etc)	
+
+Install from https://ffmpeg.org/download.html and add to system PATH
+
+On Windows, make sure the ffmpeg/bin folder is added to your system's PATH.
+
+🔁 Optional (for Development)
+
+You can also include a requirements-dev.txt if you plan to contribute or enhance it further:
+
+ipython
+flask-reload
+python-dotenv
