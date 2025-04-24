@@ -12,7 +12,7 @@ body {
   background: linear-gradient(135deg, #e0f7fa, #80d8ff);
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,11 +25,13 @@ body {
   padding: 40px 30px;
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  width: 90%;
-  max-width: 500px;
+  width: 80%;
+  max-width: 550px;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  text-align: justify;
+  backdrop-filter: 10px;
   position: relative;
+  
 }
 
 .container:hover {
@@ -37,10 +39,13 @@ body {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
-#darkModeToggle {
+.top-right-toggle {
   position: absolute;
-  top: -20px;
-  right: -20px;
+  top: 20px;
+  right: 20px;
+}
+
+#darkModeToggle {
   padding: 10px 14px;
   background-color: #2196f3;
   color: white;
@@ -55,6 +60,7 @@ body {
 #darkModeToggle:hover {
   background-color: #1976d2;
 }
+
 
 h1 {
   text-align: center;
@@ -101,11 +107,15 @@ button:not(#darkModeToggle):hover {
 }
 
 .result {
+  align-items: center;  
   margin-top: 25px;
   padding: 20px;
   background-color: #f4fbff;
   border-left: 5px solid #2196f3;
   border-radius: 12px;
+  max-height: 200vh;
+  max-width: 550px;
+  overflow: auto;
   box-shadow: inset 0 0 10px #d3ebf9;
 }
 
@@ -194,17 +204,25 @@ align-items: end;
 <body>
   <div class="container">
     <h1>🎧 Audio Grammar Analyzer</h1>
+    <div class="recorder">
+      <button id="startBtn">🎙️ Start Recording</button>
+      <button id="stopBtn" disabled>⏹️ Stop Recording</button>
+    </div>
+    <audio id="audioPlayback" controls style="display: none;"></audio>
+    
     <form action="/process_audio" method="post" enctype="multipart/form-data">
       <input type="file" name="audio" accept=".wav,.mp3,.m4a" required>
       <button type="submit">Analyze Audio</button>
-      <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
-
+      <div class="top-right-toggle">
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+    </div>
     </form>
 
     {% if text %}
     <div class="result">
       <div class="text"><strong>Recognized Text:</strong><br>{{ text }}</div>
       <div class="score"><strong>Grammar Score:</strong> {{ score }}</div>
+      <center><button type="button" onclick="startOver()">🔄 Check Again</button></center>
     </div>
     {% endif %}
     <footer>
@@ -220,5 +238,55 @@ align-items: end;
       document.body.classList.toggle("dark");
       toggleBtn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
-  </script>
+  
+    function startOver() {
+      window.location.href = "/";
+    }
+let mediaRecorder;
+let audioChunks = [];
+
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
+const audioPlayback = document.getElementById("audioPlayback");
+
+startBtn.addEventListener("click", async () => {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+  
+  audioChunks = [];
+
+  mediaRecorder.ondataavailable = event => {
+    if (event.data.size > 0) audioChunks.push(event.data);
+  };
+
+  mediaRecorder.onstop = async () => {
+    const blob = new Blob(audioChunks, { type: 'audio/webm' });
+    const audioURL = URL.createObjectURL(blob);
+    audioPlayback.src = audioURL;
+    audioPlayback.style.display = 'block';
+
+    const formData = new FormData();
+    formData.append('audio', blob, 'recorded_audio.webm');
+
+    const response = await fetch("/recorded-audio", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+    alert("Transcript: " + result.transcript + "\nGrammar Score: " + result.grammar_score);
+  };
+
+  mediaRecorder.start();
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
+});
+
+stopBtn.addEventListener("click", () => {
+  mediaRecorder.stop();
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+});
+</script>
+  
 </html>
