@@ -3,23 +3,23 @@ import os
 import speech_recognition as sr
 import joblib
 from werkzeug.utils import secure_filename
+from pydub import AudioSegment
 
 app = Flask(__name__)
 
 # Load grammar model and vectorizer
 model = joblib.load("models/grammar_model.pkl")
-vectorizer = joblib.load("models/vectorizer.pkl")  # Make sure this exists and is the one used during training
+vectorizer = joblib.load("models/vectorizer.pkl")
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Ensure the upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
     return render_template('index.html', text=None, score=None)
 
+# Route for uploaded audio files
 @app.route('/process_audio', methods=['POST'])
 def process_audio():
     if 'audio' not in request.files:
@@ -33,22 +33,53 @@ def process_audio():
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(file_path)
 
-    # Convert audio to text using SpeechRecognition
+    return handle_audio_file(file_path)
+
+# Route for recorded audio (assumed webm)
+@app.route('/recorded-audio', methods=['POST'])
+def recorded_audio():
+    if 'audio' not in request.files:
+        return {"error": "No file uploaded"}, 400
+
+    file = request.files['audio']
+    if file.filename == '':
+        return {"error": "No selected file"}, 400
+
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(file_path)
+
+    # Convert from webm to wav using pydub
+    try:
+        audio_webm = AudioSegment.from_file(file_path, format="webm")
+        wav_path = file_path.replace(".webm", ".wav")
+        audio_webm.export(wav_path, format="wav")
+    except Exception as e:
+        return {"error": f"Audio conversion failed: {str(e)}"}, 500
+
+    return handle_audio_file(wav_path, json_output=True)
+
+# Common handler for audio processing
+def handle_audio_file(path, json_output=False):
     recognizer = sr.Recognizer()
-    with sr.AudioFile(file_path) as source:
-        audio = recognizer.record(source)
-        try:
+    try:
+        with sr.AudioFile(path) as source:
+            audio = recognizer.record(source)
             text = recognizer.recognize_google(audio)
-        except sr.UnknownValueError:
-            return render_template('index.html', text="Could not understand audio", score=None)
-        except sr.RequestError:
-            return render_template('index.html', text="Speech recognition service failed", score=None)
+    except sr.UnknownValueError:
+        text = "Could not understand audio"
+        score = None
+    except sr.RequestError:
+        text = "Speech recognition failed"
+        score = None
+    else:
+        X_input = vectorizer.transform([text])
+        score = model.predict(X_input)[0]
+        score = round(score, 2)
 
-    # Preprocess the text using the same vectorizer used during training
-    X_input = vectorizer.transform([text])  # Vectorize the transcribed text
-    score = model.predict(X_input)[0]       # Predict grammar score
-
-    return render_template('index.html', text=text, score=round(score, 2))
+    if json_output:
+        return {"transcript": text, "grammar_score": score}
+    return render_template('index.html', text=text, score=score)
 
 if __name__ == '__main__':
     app.run(debug=True)
