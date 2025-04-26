@@ -106,6 +106,9 @@ Dark Mode 🌙
 
 Realtime speech recognition..
 
+![screenshot_2025-04-26_14-21-27](https://github.com/user-attachments/assets/d482c0f6-a335-4d47-8b52-46e5e8a75bd9)
+![screenshot_2025-04-26_14-24-11](https://github.com/user-attachments/assets/1446540b-f806-4ca9-8b51-891322de0063)
+![screenshot_2025-04-26_14-23-36](https://github.com/user-attachments/assets/2856f221-d494-4c27-961b-991402b98930)
 
 
 **🔐 License**
