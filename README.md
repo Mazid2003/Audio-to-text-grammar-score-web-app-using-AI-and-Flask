@@ -90,7 +90,7 @@ SpeechRecognition 🎙️
 
 **📸 UI Preview**
 
-Light Mode ☀️  
+**Light Mode ☀️** 
 
 Give an Audio file(.wav file) as input..
 
@@ -98,18 +98,17 @@ Give an Audio file(.wav file) as input..
 
 ![out5](https://github.com/user-attachments/assets/bfc5f53e-9244-4a9b-a5dd-a346d8b68c7e)
 
-Dark Mode 🌙
+**Dark Mode 🌙**
 
 ![out2](https://github.com/user-attachments/assets/02cd2240-a914-4cdb-b7ec-00f1f67b88ed)
 
 ![out4](https://github.com/user-attachments/assets/cc84ae1d-e27c-41f9-888b-23dd57793d61)
 
-Realtime speech recognition..
+**Realtime speech recognition..**
 
-![screenshot_2025-04-26_14-21-27](https://github.com/user-attachments/assets/d482c0f6-a335-4d47-8b52-46e5e8a75bd9)
 ![screenshot_2025-04-26_14-24-11](https://github.com/user-attachments/assets/1446540b-f806-4ca9-8b51-891322de0063)
-![screenshot_2025-04-26_14-23-36](https://github.com/user-attachments/assets/2856f221-d494-4c27-961b-991402b98930)
 
+![screenshot_2025-04-26_14-23-36](https://github.com/user-attachments/assets/2856f221-d494-4c27-961b-991402b98930)
 
 **🔐 License**
 
