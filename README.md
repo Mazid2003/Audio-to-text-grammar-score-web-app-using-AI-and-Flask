@@ -114,15 +114,16 @@ Give an Audio file(.wav file) as input..
 
 This project is licensed under the MIT License.
 
+**🤝 Contributing**
+
+Contributions, suggestions, and improvements are welcome!
+
+Feel free to fork this project and submit a PR 🚀
+
 **🙋‍♂️ Author**
 
 **Mohammad Mazid**
 
 📧 mazidmd750@gmail.com
 
-
-**🤝 Contributing**
-
-Contributions, suggestions, and improvements are welcome!
-Feel free to fork this project and submit a PR 🚀
 
