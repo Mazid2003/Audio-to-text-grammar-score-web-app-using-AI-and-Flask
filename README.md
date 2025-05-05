@@ -122,8 +122,8 @@ Feel free to fork this project and submit a PR 🚀
 
 **🙋‍♂️ Author**
 
-Created by Mohammad Mazid
-Email:mazidmd750@gmail.com
+Created by Mohammad Mazid<br>
+Email:mazidmd750@gmail.com<br>
 Linkedin: https://www.linkedin.com/in/mohammadmazid
 
 
