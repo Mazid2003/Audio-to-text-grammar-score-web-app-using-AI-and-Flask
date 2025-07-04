@@ -88,7 +88,7 @@ scikit-learn 🤖
 
 SpeechRecognition 🎙️
 
-**📸 UI Preview**
+## 📸 UI Preview
 
 **Light Mode ☀️** 
 
@@ -110,7 +110,7 @@ Give an Audio file(.wav file) as input..
 
 ![screenshot_2025-04-26_14-23-36](https://github.com/user-attachments/assets/2856f221-d494-4c27-961b-991402b98930)
 
-**🔐 License**
+## 🔐 License
 
 This project is licensed under the MIT License.
 
