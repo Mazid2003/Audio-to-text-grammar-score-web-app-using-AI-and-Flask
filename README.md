@@ -66,7 +66,7 @@ Open your browser and navigate to:
 
 http://127.0.0.1:5000
 
-**🧠 Model Details**
+## 🧠 Model Details
 
 The model is trained on labeled audio data.
 
@@ -74,7 +74,7 @@ Audio is converted to text using SpeechRecognition.
 
 Text is preprocessed and passed to a machine learning model (stored in model.pkl) that predicts a grammar score between 0 and 100.
 
-**💡 Technologies Used**
+## 💡 Technologies Used
 
 Python 🐍
 
