@@ -84,8 +84,6 @@ HTML5 & CSS3 🎨
 
 JavaScript (for dark mode toggle)
 
-scikit-learn 🤖
-
 SpeechRecognition 🎙️
 
 ## 📸 UI Preview
