@@ -1,5 +1,5 @@
 Flask==3.0.2
-torch==2.2.2
+torch==2.5.0
 gunicorn==21.2.0
 whisper==1.1.10
 pydub==0.25.1
