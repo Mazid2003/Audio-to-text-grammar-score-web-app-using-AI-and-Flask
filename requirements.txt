@@ -1,9 +1,11 @@
 Flask==3.0.2
 gunicorn==21.2.0
-openai-whisper==20240930
+whisper==1.1.10
 pydub==0.25.1
 SpeechRecognition==3.10.0
 language_tool_python==2.9.2
 scikit-learn==1.4.2
 joblib==1.4.2
 ffmpeg-python==0.2.0
+
+
