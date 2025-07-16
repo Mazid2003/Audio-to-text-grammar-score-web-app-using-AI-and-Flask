@@ -3,6 +3,10 @@
 This web application allows users to upload or record audio, converts the speech to text using speech recognition, and provides a grammar score prediction using a trained machine learning model. The interface includes a toggle button for switching between light and dark mode for better accessibility and user experience.
 
 ---
+You can also check the **demo** of the project here:
+
+https://drive.google.com/file/d/1yvjZO202itet5r44IpD7YSRIupH3eFOa/view?usp=drive_link
+
 ## 🌟 Features
 
 - 🎙️ **Speech-to-Text** conversion using audio files.
